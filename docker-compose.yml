@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+
+  main:
+    build:
+      context: src
+    container_name: openhab
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+      - type: bind
+        source: /etc/timezone
+        target: /etc/timezone
+        read_only: true
+      - type: bind
+        source: ./dist/volume/data
+        target: /openhab/userdata
+      - type: bind
+        source: ./dist/volume/config
+        target: /openhab/conf
+      - type: bind
+        source: ./dist/volume/addons
+        target: /openhab/addons
+    environment:
+      EXTRA_JAVA_OPTS: -Duser.timezone=Europe/Berlin
