@@ -4,8 +4,22 @@ set -o pipefail
 
 if [[ ! -f conf/services/runtime.cfg ]]; then
   mkdir --parents conf/services
-  cp --verbose /template/conf/services/runtime.cfg conf/services/runtime.cfg
+  mkdir --parents conf/automation/jsr223
+  mkdir conf/html
+  mkdir conf/icons
+  mkdir conf/items
+  mkdir conf/persistence
+  mkdir conf/rules
+  mkdir conf/scripts
+  mkdir conf/sitemaps
+  mkdir conf/sounds
+  mkdir conf/things
+  mkdir conf/transform
+  cp --verbose --recursive --update /template/conf/* conf
 fi
 
-influxd
-/entrypoint gosu openhab tini -s ./start.sh
+# influxd &>/dev/null &
+INFLUXD_HTTP_BIND_ADDRESS=':28086' influxd &
+bash /wait-for-it 127.0.0.1:28086
+influx setup --force --org openhab --bucket main --username openhab --password habopen_________
+/entrypoint "$@"
