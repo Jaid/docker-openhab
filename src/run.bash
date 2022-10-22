@@ -3,9 +3,7 @@ set -o errexit
 set -o pipefail
 
 if [[ ! -f conf/services/runtime.cfg ]]; then
-  mkdir --parents conf/services
   mkdir --parents conf/automation/jsr223
-  mkdir conf/html
   mkdir conf/icons
   mkdir conf/items
   mkdir conf/persistence
@@ -14,7 +12,6 @@ if [[ ! -f conf/services/runtime.cfg ]]; then
   mkdir conf/sitemaps
   mkdir conf/sounds
   mkdir conf/things
-  mkdir conf/transform
   cp --verbose --recursive --update /template/conf/* conf
 fi
 
