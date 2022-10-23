@@ -1,6 +1,6 @@
 FROM jaidchen/ubuntu-builder:main AS build
 
-FROM openhab/openhab:3.4.0.M3-debian AS openhab
+FROM openhab/openhab:3.4.0.M3-debian
 ENV CRYPTO_POLICY=unlimited
 ENV USER_ID=1000
 ENV GROUP_ID=1000
