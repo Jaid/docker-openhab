@@ -15,9 +15,8 @@ if [[ ! -f conf/services/runtime.cfg ]]; then
   cp --verbose --recursive --update /template/conf/* conf
 fi
 
-# influxd &>/dev/null &
-INFLUXD_HTTP_BIND_ADDRESS=':28086' influxd &
-bash /wait-for-it 127.0.0.1:28086
+influxd &>/dev/null &
+bash /wait-for-it 127.0.0.1:8086
 influx setup --force --org openhab --bucket main --username openhab --password habopen_________
 
 if [[ $DEBUG_OPENHAB = true ]]; then
