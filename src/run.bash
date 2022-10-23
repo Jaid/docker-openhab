@@ -19,4 +19,9 @@ fi
 INFLUXD_HTTP_BIND_ADDRESS=':28086' influxd &
 bash /wait-for-it 127.0.0.1:28086
 influx setup --force --org openhab --bucket main --username openhab --password habopen_________
-/entrypoint "$@"
+
+if [[ $DEBUG_OPENHAB = true ]]; then
+  /entrypoint "$@" debug
+else
+  /entrypoint "$@"
+fi
