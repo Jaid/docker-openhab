@@ -19,16 +19,15 @@ influxUp=false
 set +o errexit
 bash /wait-for-it 127.0.0.1:8086 --timeout=2 --strict -- export influxUp=true
 set -o errexit
-ls -lah /etc/influxdb
 if ! $influxUp; then
-  influxd &>/dev/null &
+  influxd --engine-path "$INFLUXD_CONFIG_PATH" &>/dev/null &
   bash /wait-for-it --timeout=180 127.0.0.1:8086
 fi
-if [[ ! -f /influxdb ]]; then
-  ninflux setup --force --org openhab --bucket main --username openhab --password habopen_________
+sleep 10
+if [[ ! -f $INFLUXD_CONFIG_PATH/config ]]; then
+  influx setup --force --org openhab --bucket default --username openhab --password habopen_________
 fi
-ls -lah /etc/influxdb
-sleep 5000
+exit 0
 if [[ $DEBUG_OPENHAB = true ]]; then
   /entrypoint "$@" debug
 else
