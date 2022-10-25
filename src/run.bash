@@ -15,10 +15,20 @@ if [[ ! -f conf/services/runtime.cfg ]]; then
   cp --verbose --recursive --update /template/conf/* conf
 fi
 
-influxd &>/dev/null &
-bash /wait-for-it 127.0.0.1:8086
-influx setup --force --org openhab --bucket main --username openhab --password habopen_________
-
+influxUp=false
+set +o errexit
+bash /wait-for-it 127.0.0.1:8086 --timeout=2 --strict -- export influxUp=true
+set -o errexit
+ls -lah /etc/influxdb
+if ! $influxUp; then
+  influxd &>/dev/null &
+  bash /wait-for-it --timeout=180 127.0.0.1:8086
+fi
+if [[ ! -f /influxdb ]]; then
+  ninflux setup --force --org openhab --bucket main --username openhab --password habopen_________
+fi
+ls -lah /etc/influxdb
+sleep 5000
 if [[ $DEBUG_OPENHAB = true ]]; then
   /entrypoint "$@" debug
 else

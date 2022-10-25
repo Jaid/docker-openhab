@@ -3,9 +3,9 @@ services:
 
   main:
     # image: openhab/openhab:3.3.0-debian
-    image: openhab/openhab:3.4.0.M3-debian
-    # build:
-    #   context: src
+    # image: openhab/openhab:3.4.0.M3-debian
+    build:
+      context: src
     container_name: openhab
     network_mode: host
     restart: unless-stopped

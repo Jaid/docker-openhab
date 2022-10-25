@@ -5,6 +5,7 @@ ENV CRYPTO_POLICY=unlimited
 ENV USER_ID=1000
 ENV GROUP_ID=1000
 ENV OPENHAB_HTTP_PORT=5300
+ENV INFLUXD_CONFIG_PATH=/influxdb
 COPY --from=build /etc/influxdb /etc/influxdb
 COPY --from=build /etc/init.d/influxdb /etc/init.d/influxdb
 COPY --from=build /etc/logrotate.d/influxdb /etc/logrotate.d/influxdb
@@ -17,4 +18,5 @@ COPY --from=build /var/log/influxdb /var/log/influxdb
 COPY --from=build /build/wait-for-it.bash /wait-for-it
 COPY run.bash /bin
 COPY template /template
+RUN mkdir --parents $INFLUXD_CONFIG_PATH
 ENTRYPOINT ["/bin/bash", "/bin/run.bash"]
