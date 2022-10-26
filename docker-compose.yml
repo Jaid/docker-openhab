@@ -6,7 +6,7 @@ services:
     # image: openhab/openhab:3.4.0.M3-debian
     build:
       context: src
-    container_name: openhab
+    container_name: openhab-dev
     network_mode: host
     restart: unless-stopped
     volumes:
@@ -21,5 +21,6 @@ services:
       - ./dist/volume/userdata:/openhab/userdata
       - ./dist/volume/conf:/openhab/conf
       - ./dist/volume/addons:/openhab/addons
+      - ./dist/volume/influxdb:/influxdb
     environment:
       EXTRA_JAVA_OPTS: -Duser.timezone=Europe/Berlin
