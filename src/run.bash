@@ -17,11 +17,11 @@ fi
 
 influxUp=false
 set +o errexit
-bash /wait-for-it 127.0.0.1:8086 --timeout=2 --strict -- export influxUp=true
+/wait-for-it 127.0.0.1:8086 --timeout=2 --strict -- export influxUp=true
 set -o errexit
 if ! $influxUp; then
   influxd --engine-path "$INFLUXD_CONFIG_PATH" &>/dev/null &
-  bash /wait-for-it --timeout=180 127.0.0.1:8086
+  /wait-for-it --timeout=180 127.0.0.1:8086
 fi
 sleep 10
 if [[ ! -f $INFLUXD_CONFIG_PATH/config ]]; then
