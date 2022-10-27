@@ -2,4 +2,4 @@
 set -o errexit
 set -o pipefail
 
-curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
+curl --location --retry 3 --fail --silent --show-error --header 'Cache-Control: no-cache' https://sh.rustup.rs | sh -s -- -y --no-modify-path
