@@ -30,4 +30,5 @@ ADD init.bash /etc/cont-init.d/init
 COPY template /template
 RUN mkdir --parents $influxdbHome
 RUN chown $USER_ID:$GROUP_ID $influxdbHome
+RUN DEBIAN_FRONTEND=noninteractive apt-get --option Acquire::Retries=60 --option Acquire::http::Timeout=180 --yes install libc-bin
 VOLUME $influxdbHome

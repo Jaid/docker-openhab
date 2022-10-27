@@ -4,8 +4,9 @@ set -o pipefail
 
 # influxdb.key GPG Fingerprint: 05CE15085FC09D18E99EFB22684A14CF2582E0C5
 # curl --location --retry 3 --fail --silent --show-error --header 'Cache-Control: no-cache' https://repos.influxdata.com/influxdb.key >influxdb.key
-printf '-----BEGIN PGP PUBLIC KEY BLOCK-----
+printf %s '-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1
+
 mQINBFYJmwQBEADCw7mob8Vzk+DmkYyiv0dTU/xgoSlp4SQwrTzat8MB8jxmx60l
 QjmhqEyuB8ho4zzZF9KV+gJWrG6Rj4t69JMTJWM7jFz+0B1PC7kJfNM+VcBmkTnj
 fP+KJjqz50ETnsF0kQTG++UJeRYjG1dDK0JQNQJAM6NQpIWJI339lcDf15vzrMnb

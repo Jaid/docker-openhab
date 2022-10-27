@@ -8,6 +8,6 @@ if [[ -z $divePath ]]; then
   printf >&2 'Variable $divePath not set\n'
   exit 1
 fi
-bash "$here/build"
+bash "$here/build" "$@"
 imageName="$("$here/imageName")"
-$divePath "$@" "$imageName"
+$divePath "$imageName"
