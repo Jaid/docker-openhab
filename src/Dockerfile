@@ -30,5 +30,4 @@ ADD init.bash /etc/cont-init.d/init
 COPY template /template
 RUN mkdir --parents $influxdbHome
 RUN chown $USER_ID:$GROUP_ID $influxdbHome
-RUN ls -lah /lib/x86_64-linux-gnu
 VOLUME $influxdbHome
