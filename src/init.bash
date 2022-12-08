@@ -21,16 +21,9 @@ mkdir --parents "$INFLUXD_ASSETS_PATH"
 mkdir --parents "$INFLUXD_ENGINE_PATH"
 chown "$USER_ID:$GROUP_ID" --recursive "$influxdbHome"
 
-# influxUp=false
-# set +o errexit
-# /wait-for-it 127.0.0.1:8086 --timeout=2 --strict -- export influxUp=true
-# set -o errexit
-# if ! $influxUp; then
 su "$appUser" -c influxd &
-influxdPid=$!
 /wait-for-it --timeout=180 "127.0.0.1:$influxPort"
-# fi
-sleep 2
+sleep 1
 
 if [[ ! -f $influxdbLocalConfig ]]; then
   printf 'Influx user not existing, creating now\n'
