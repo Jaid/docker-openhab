@@ -1,6 +1,6 @@
-FROM jaidchen/ubuntu-builder:1.0.0 AS build
+FROM jaidchen/builder:4.5.0 AS build
 
-FROM openhab/openhab:3.4.0.M5-debian
+FROM openhab/openhab:4.0.0.M3-debian
 ENV influxdbHome /influxdb
 ENV influxdbLocal /openhab/.influxdbv2
 ENV influxdbLocalConfig $influxdbLocal/configs
